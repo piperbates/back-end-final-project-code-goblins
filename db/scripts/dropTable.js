@@ -1,4 +1,5 @@
 const { query } = require("../index");
+require("dotenv").config();
 
 const sqlStatement = `
 DROP TABLE public.videos

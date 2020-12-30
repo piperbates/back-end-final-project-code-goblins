@@ -1,4 +1,5 @@
 const { query } = require("../index");
+require("dotenv").config();
 
 const sqlStatement = `
 CREATE TABLE videos(
@@ -14,7 +15,7 @@ bootcamp_week TEXT,
 description VARCHAR (500),
 github_links TEXT [],
 slides TEXT [],
-other_links TEXT [],
+other_links TEXT []
 )
 `;
 

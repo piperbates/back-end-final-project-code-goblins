@@ -54,6 +54,7 @@ router.post("/", async function (req, res, next) {
 });
 
 //Delete Video
+//Delete request to http://localhost:5000/idNumb
 
 router.delete("/:id", async function (req, res, next) {
   const id = req.params.id;
@@ -62,8 +63,9 @@ router.delete("/:id", async function (req, res, next) {
 });
 
 //Update Video
-
-router.patch("/:id", async function (req, res, next) {
+//Put request to http://localhost:5000/idNumb
+//In req.body put in column wanting to be changed with value.
+router.put("/:id", async function (req, res, next) {
   const id = req.params.id;
   const {
     title,
@@ -94,7 +96,7 @@ router.patch("/:id", async function (req, res, next) {
     other_links,
     id
   );
-  res.json({ success: true, data: result });
+  res.json({ success: true, data: `Row with id ${result} has been updated.` });
 });
 
 module.exports = router;

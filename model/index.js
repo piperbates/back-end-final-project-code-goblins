@@ -76,19 +76,20 @@ async function updateVideo(
 ) {
   const result = await query(
     `UPDATE videos SET
-  title = ($1),
-  lecturer = ($2),
-  video_url = ($3),
-  thumbnail_url = ($4),
-  tags = ($5),
-  timestamps = ($6),
-  lecture_date = ($7),
-  bootcamp_week = ($8),
-  description = ($9),
-  github_links = ($10),
-  slides = ($11),
-  other_links = ($12) 
-  WHERE id = ($13) `,
+  title = COALESCE($1, title),
+  lecturer = COALESCE($2, lecturer),
+  video_url = COALESCE($3, video_url),
+  thumbnail_url = COALESCE($4, thumbnail_url),
+  tags = COALESCE($5, tags),
+  timestamps = COALESCE($6, timestamps),
+  lecture_date = COALESCE($7, lecture_date),
+  bootcamp_week = COALESCE($8, bootcamp_week),
+  description = COALESCE($9, description),
+  github_links = COALESCE($10, github_links),
+  slides = COALESCE($11, slides),
+  other_links = COALESCE($12, other_links) 
+  WHERE id = ($13) 
+  RETURNING id;`,
     [
       title,
       lecturer,
@@ -105,7 +106,7 @@ async function updateVideo(
       id,
     ]
   );
-  return result.rows;
+  return result.rows[0].id;
 }
 
 module.exports = {

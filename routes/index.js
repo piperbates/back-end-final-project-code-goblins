@@ -1,8 +1,12 @@
 var express = require("express");
 var router = express.Router();
 
-
-const { getAllVideos, addVideo } = require("../model/index");
+const {
+  getAllVideos,
+  addVideo,
+  deleteVideo,
+  updateVideo,
+} = require("../model/index");
 
 //get all videos
 
@@ -46,6 +50,50 @@ router.post("/", async function (req, res, next) {
     other_links
   );
   console.log(result);
+  res.json({ success: true, data: result });
+});
+
+//Delete Video
+
+router.delete("/:id", async function (req, res, next) {
+  const id = req.params.id;
+  const result = await deleteVideo(id);
+  res.json({ success: true, data: result });
+});
+
+//Update Video
+
+router.patch("/:id", async function (req, res, next) {
+  const id = req.params.id;
+  const {
+    title,
+    lecturer,
+    video_url,
+    thumbnail_url,
+    tags,
+    timestamps,
+    lecture_date,
+    bootcamp_week,
+    description,
+    github_links,
+    slides,
+    other_links,
+  } = req.body;
+  const result = await updateVideo(
+    title,
+    lecturer,
+    video_url,
+    thumbnail_url,
+    tags,
+    timestamps,
+    lecture_date,
+    bootcamp_week,
+    description,
+    github_links,
+    slides,
+    other_links,
+    id
+  );
   res.json({ success: true, data: result });
 });
 

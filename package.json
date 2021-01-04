@@ -6,7 +6,8 @@
     "start": "nodemon -r dotenv/config ./bin/www",
     "dev": "nodemon -r dotenv/config ./bin/www",
     "createTable": "node db/scripts/createTable.js",
-    "dropTable": "node db/scripts/dropTable.js"
+    "dropTable": "node db/scripts/dropTable.js",
+    "populateTable": "node db/scripts/populateTable.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

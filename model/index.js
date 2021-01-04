@@ -6,6 +6,29 @@ async function getAllVideos() {
   return result.rows;
 }
 
+//Get filtered videos from the search query URL parameters
+async function getFilteredVideos(urlQueries) {
+  // Destructure url search parameters
+  let { search, lecturer, tag } = urlQueries;
+  // Pre-format search string if it exists
+  search ? (search = `%${search}%`) : (search = `%%`);
+  // Pre-format lecturer string if it exists
+  lecturer ? (lecturer = `%${lecturer}%`) : (lecturer = "%%");
+  // Pre-format tags if they exist
+  tag
+    ? (tag = "['" + (Array.isArray(tag) ? tag.join("','") : tag) + "']")
+    : (tag = "[]");
+
+  const result = await query(
+    `SELECT * FROM videos
+      WHERE (description ILIKE $1 OR title ILIKE $1)
+      AND (lecturer ILIKE $2)
+      AND ARRAY ${tag}::text[]<@tags;`,
+    [search, lecturer]
+  );
+  return result.rows;
+}
+
 //Add video
 async function addVideo(
   title,
@@ -111,6 +134,7 @@ async function updateVideo(
 
 module.exports = {
   getAllVideos,
+  getFilteredVideos,
   addVideo,
   deleteVideo,
   updateVideo,

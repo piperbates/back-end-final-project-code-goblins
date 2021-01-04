@@ -1,20 +1,24 @@
 var express = require("express");
 var router = express.Router();
 
+
 const {
   getAllVideos,
   addVideo,
   deleteVideo,
   updateVideo,
+  getFilteredVideos,
 } = require("../model/index");
 
-//get all videos
+//get all videos with optional search filter parameters
 
 router.get("/", async function (req, res, next) {
-  console.log("get request made");
-  const result = await getAllVideos();
-  console.log("request made");
-  console.log(result);
+  const { search, lecturer, tag } = req.query;
+  if (search || lecturer || tag) {
+    var result = await getFilteredVideos({ search, lecturer, tag });
+  } else {
+    var result = await getAllVideos();
+  }
   res.json({ success: true, data: result });
 });
 

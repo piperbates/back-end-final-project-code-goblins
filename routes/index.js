@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
 
-
 const {
   getAllVideos,
   addVideo,
@@ -19,7 +18,7 @@ router.get("/", async function (req, res, next) {
   } else {
     var result = await getAllVideos();
   }
-  res.json({ success: true, data: result });
+  res.json(result);
 });
 
 //add a video

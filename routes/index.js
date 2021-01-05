@@ -18,7 +18,7 @@ router.get("/", async function (req, res, next) {
   } else {
     var result = await getAllVideos();
   }
-  res.json({ success: true, data: result });
+  res.json(result);
 });
 
 // Get a specific video by id at the specified path

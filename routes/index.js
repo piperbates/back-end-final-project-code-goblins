@@ -8,6 +8,8 @@ const {
   updateVideo,
   getFilteredVideos,
   getVideoById,
+  getAllFeedback,
+  addNewFeedback
 } = require("../model/index");
 
 // Get all videos with optional search filter parameters (see readme.md for query parameters)

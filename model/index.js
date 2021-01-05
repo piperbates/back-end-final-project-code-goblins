@@ -139,11 +139,40 @@ async function updateVideo(
   return result.rows[0].id;
 }
 
+
+/* FEEDBACK BUTTON */
+//get all feedback
+async function getAllFeedback() {
+  const res = await query(`
+  SELECT * FROM feedbacktable
+    `);
+  return res.rows;
+}
+
+
+//Add new feedback function, adds new piece of feedback to the feedback table
+async function addNewFeedback(value) {
+    console.log({value})
+    const res = await query(
+      `
+      INSERT INTO feedbackTable (
+        feedback
+        )
+      VALUES ($1)
+      `,
+      [
+        value
+      ]
+    );
+    return res;
+  }
+
 module.exports = {
   getAllVideos,
   getFilteredVideos,
-  getVideoById,
   addVideo,
   deleteVideo,
   updateVideo,
+  getAllFeedback, 
+  addNewFeedback
 };

@@ -9,7 +9,7 @@ async function getAllVideos() {
 //Get filtered videos from the search query URL parameters
 async function getFilteredVideos(urlQueries) {
   // Destructure url search parameters
-  let { search, lecturer, tag } = urlQueries;
+  let { search, lecturer, week, tag } = urlQueries;
   // Pre-format search string if it exists
   search ? (search = `%${search}%`) : (search = `%%`);
   // Pre-format lecturer string if it exists
@@ -23,9 +23,16 @@ async function getFilteredVideos(urlQueries) {
     `SELECT * FROM videos
       WHERE (description ILIKE $1 OR title ILIKE $1)
       AND (lecturer ILIKE $2)
+      AND (bootcamp_week = COALESCE($3, bootcamp_week))
       AND ARRAY ${tag}::text[]<@tags;`,
-    [search, lecturer]
+    [search, lecturer, week]
   );
+  return result.rows;
+}
+
+// Get a specific video by ID
+async function getVideoById(id) {
+  const result = await query("SELECT * FROM videos WHERE id = $1;", [id]);
   return result.rows;
 }
 
@@ -135,6 +142,7 @@ async function updateVideo(
 module.exports = {
   getAllVideos,
   getFilteredVideos,
+  getVideoById,
   addVideo,
   deleteVideo,
   updateVideo,

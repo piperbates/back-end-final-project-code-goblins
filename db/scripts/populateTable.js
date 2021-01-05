@@ -12,12 +12,24 @@ const sampleData = [
     tags: ["wondr", "guest lecture", "agile", "teams", "startups"],
     timestamps: [
       {
-        name: "start",
-        time: "0",
+        timeDesc: "Start",
+        timeString: "00:00:00",
+        timeSecondsValue: 0,
       },
       {
-        name: "middle",
-        time: "1800",
+        timeDesc: "Our Journey",
+        timeString: "00:13:39",
+        timeSecondsValue: 300,
+      },
+      {
+        timeDesc: "Our Company",
+        timeString: "00:34:30",
+        timeSecondsValue: 2070,
+      },
+      {
+        timeDesc: "Final Words",
+        timeString: "00:49:37",
+        timeSecondsValue: 2977,
       },
     ],
     lecture_date: "2020-12-17",
@@ -35,12 +47,29 @@ const sampleData = [
     tags: ["serverless", "aws", "cloud"],
     timestamps: [
       {
-        name: "start",
-        time: "0",
+        timeDesc: "Introduing AWS",
+        timeString: "00:00:00",
+        timeSecondsValue: 0,
       },
       {
-        name: "middle",
-        time: "1800",
+        timeDesc: "More on sererless functions",
+        timeString: "00:26:36",
+        timeSecondsValue: 1596,
+      },
+      {
+        timeDesc: "Lambda functions",
+        timeString: "01:17:35",
+        timeSecondsValue: 4655,
+      },
+      {
+        timeDesc: "Putting it all together",
+        timeString: "01:46:15",
+        timeSecondsValue: 6375,
+      },
+      {
+        timeDesc: "What next",
+        timeString: "02:17:22",
+        timeSecondsValue: 8242,
       },
     ],
     lecture_date: "2020-12-11",
@@ -58,12 +87,19 @@ const sampleData = [
     tags: ["docker", "servers", "cloud"],
     timestamps: [
       {
-        name: "start",
-        time: "0",
+        timeDesc: "Introducing Docker",
+        timeString: "00:00:00",
+        timeSecondsValue: 0,
       },
       {
-        name: "middle",
-        time: "1800",
+        timeDesc: "Containers vs Serverless",
+        timeString: "00:06:30",
+        timeSecondsValue: 390,
+      },
+      {
+        timeDesc: "Leveraging the power of containers",
+        timeString: "00:18:54",
+        timeSecondsValue: 1134,
       },
     ],
     lecture_date: "2020-12-10",
@@ -81,12 +117,24 @@ const sampleData = [
     tags: ["react", "usereducer", "functions", "javascript"],
     timestamps: [
       {
-        name: "start",
-        time: "0",
+        timeDesc: "Start",
+        timeString: "00:00:00",
+        timeSecondsValue: 0,
       },
       {
-        name: "middle",
-        time: "1800",
+        timeDesc: "Deep dive on use reducer",
+        timeString: "00:05:30",
+        timeSecondsValue: 330,
+      },
+      {
+        timeDesc: "Further React hooks",
+        timeString: "00:21:20",
+        timeSecondsValue: 1280,
+      },
+      {
+        timeDesc: "Advanced techniques",
+        timeString: "00:42:49",
+        timeSecondsValue: 2569,
       },
     ],
     lecture_date: "2020-11-10",
@@ -104,12 +152,24 @@ const sampleData = [
     tags: ["node", "authentication", "jwt", "tokens"],
     timestamps: [
       {
-        name: "start",
-        time: "0",
+        timeDesc: "What are JWTs?",
+        timeString: "00:00:00",
+        timeSecondsValue: 0,
       },
       {
-        name: "middle",
-        time: "1800",
+        timeDesc: "The inner workings of tokens",
+        timeString: "00:07:10",
+        timeSecondsValue: 430,
+      },
+      {
+        timeDesc: "Security essentials",
+        timeString: "00:13:50",
+        timeSecondsValue: 830,
+      },
+      {
+        timeDesc: "Workshop review",
+        timeString: "00:28:47",
+        timeSecondsValue: 1727,
       },
     ],
     lecture_date: "2020-11-06",

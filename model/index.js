@@ -156,12 +156,13 @@ async function addNewFeedback(value) {
     const res = await query(
       `
       INSERT INTO feedbackTable (
+        videoid,
         feedback
         )
-      VALUES ($1)
+      VALUES ($1, $2)
       `,
       [
-        value
+        value.videoId, value.feedback
       ]
     );
     return res;

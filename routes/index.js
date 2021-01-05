@@ -1,28 +1,34 @@
 var express = require("express");
 var router = express.Router();
 
-
 const {
   getAllVideos,
   addVideo,
   deleteVideo,
   updateVideo,
   getFilteredVideos,
+  getVideoById,
 } = require("../model/index");
 
-//get all videos with optional search filter parameters
-
+// Get all videos with optional search filter parameters (see readme.md for query parameters)
 router.get("/", async function (req, res, next) {
-  const { search, lecturer, tag } = req.query;
-  if (search || lecturer || tag) {
-    var result = await getFilteredVideos({ search, lecturer, tag });
+  const { search, lecturer, week, tag } = req.query;
+  if (search || lecturer || week || tag) {
+    var result = await getFilteredVideos({ search, lecturer, week, tag });
   } else {
     var result = await getAllVideos();
   }
   res.json({ success: true, data: result });
 });
 
-//add a video
+// Get a specific video by id at the specified path
+router.get("/:id", async function (req, res, next) {
+  const { id } = req.params;
+  const result = await getVideoById(id);
+  res.json({ success: true, data: result });
+});
+
+// Add a video
 router.post("/", async function (req, res, next) {
   console.log("post request made");
   const {

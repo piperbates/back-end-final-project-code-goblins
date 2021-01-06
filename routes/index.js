@@ -8,12 +8,12 @@ const {
   updateVideo,
   getFilteredVideos,
   getVideoById,
-  // getAllFeedback,
+  getAllFeedback,
   addNewFeedback
 } = require("../model/index");
 
 // Get all videos with optional search filter parameters (see readme.md for query parameters)
-router.get("/", async function (req, res, next) {
+router.get("/resources", async function (req, res, next) {
   const { search, lecturer, week, tag } = req.query;
   if (search || lecturer || week || tag) {
     var result = await getFilteredVideos({ search, lecturer, week, tag });
@@ -24,14 +24,14 @@ router.get("/", async function (req, res, next) {
 });
 
 // Get a specific video by id at the specified path
-router.get("/:id", async function (req, res, next) {
+router.get("/resources/:id", async function (req, res, next) {
   const { id } = req.params;
   const result = await getVideoById(id);
   res.json({ success: true, data: result });
 });
 
 // Add a video
-router.post("/", async function (req, res, next) {
+router.post("/resources", async function (req, res, next) {
   console.log("post request made");
   const {
     title,
@@ -68,7 +68,7 @@ router.post("/", async function (req, res, next) {
 //Delete Video
 //Delete request to http://localhost:5000/idNumb
 
-router.delete("/:id", async function (req, res, next) {
+router.delete("/resources/:id", async function (req, res, next) {
   const id = req.params.id;
   const result = await deleteVideo(id);
   res.json({ success: true, data: result });
@@ -77,7 +77,7 @@ router.delete("/:id", async function (req, res, next) {
 //Update Video
 //Put request to http://localhost:5000/idNumb
 //In req.body put in column wanting to be changed with value.
-router.put("/:id", async function (req, res, next) {
+router.put("/resources/:id", async function (req, res, next) {
   const id = req.params.id;
   const {
     title,
@@ -112,11 +112,11 @@ router.put("/:id", async function (req, res, next) {
 });
 
 
-// /* GET all feedback */
-// router.get('/feedback', async function(req, res, next) {
-//   const feedback = await getAllFeedback();
-//   res.json({success: true, payload: feedback})
-// });
+/* GET all feedback */
+router.get('/feedback', async function(req, res, next) {
+  const feedback = await getAllFeedback();
+  res.json({success: true, payload: feedback})
+});
 
 //POST new feedback
 router.post("/feedback", async function (req, res) {

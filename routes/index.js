@@ -8,7 +8,7 @@ const {
   updateVideo,
   getFilteredVideos,
   getVideoById,
-  getAllFeedback,
+  // getAllFeedback,
   addNewFeedback
 } = require("../model/index");
 

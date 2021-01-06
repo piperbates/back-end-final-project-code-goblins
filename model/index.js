@@ -174,6 +174,7 @@ module.exports = {
   addVideo,
   deleteVideo,
   updateVideo,
+  getVideoById,
   getAllFeedback, 
   addNewFeedback
 };

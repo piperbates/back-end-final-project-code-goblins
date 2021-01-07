@@ -9,7 +9,8 @@
     "dropTable": "node db/scripts/dropTable.js",
     "createFeedbackTable": "node db/scripts/createFeedbackTable.js",
     "dropFeedbackTable": "node db/scripts/dropFeedbackTable.js",
-    "populateTable": "node db/scripts/populateTable.js"
+    "populateTable": "node db/scripts/populateTable.js",
+    "resetVideoTable": "node -r dotenv/config db/scripts/resetVideoTable.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

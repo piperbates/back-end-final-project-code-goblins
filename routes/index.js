@@ -9,7 +9,7 @@ const {
   getFilteredVideos,
   getVideoById,
   // getAllFeedback,
-  addNewFeedback
+  addNewFeedback,
 } = require("../model/index");
 
 // Get all videos with optional search filter parameters (see readme.md for query parameters)
@@ -27,7 +27,7 @@ router.get("/", async function (req, res, next) {
 router.get("/:id", async function (req, res, next) {
   const { id } = req.params;
   const result = await getVideoById(id);
-  res.json({ success: true, data: result });
+  res.json(result);
 });
 
 // Add a video
@@ -111,7 +111,6 @@ router.put("/:id", async function (req, res, next) {
   res.json({ success: true, data: `Row with id ${result} has been updated.` });
 });
 
-
 // /* GET all feedback */
 // router.get('/feedback', async function(req, res, next) {
 //   const feedback = await getAllFeedback();
@@ -122,7 +121,7 @@ router.put("/:id", async function (req, res, next) {
 router.post("/feedback", async function (req, res) {
   let body = req.body;
   console.log(`this is the feedback for ${body.videoId}: ${body.feedback}`);
-  
+
   const items = await addNewFeedback(body);
   // console.log("this is items", items);
   res.json(items);

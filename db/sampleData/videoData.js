@@ -28,7 +28,7 @@ const sampleData = [
       },
     ],
     lecture_date: "2020-12-17",
-    bootcamp_week: 13,
+    bootcamp_week: "13",
     description: "Simon and David from Wondr talk about their startup journey",
     github_links: [
       {
@@ -64,7 +64,7 @@ const sampleData = [
   },
   {
     title: "AWS Serverless",
-    lecturer: "Liz Kauffmann",
+    lecturer: "Liz Kaufmann",
     video_url: "https://vimeo.com/495725984",
     thumbnail_url: "https://i.vimeocdn.com/video/1025552912_295x166.jpg?r=pad",
     tags: ["serverless", "aws", "cloud"],
@@ -96,7 +96,7 @@ const sampleData = [
       },
     ],
     lecture_date: "2020-12-11",
-    bootcamp_week: 12,
+    bootcamp_week: "12",
     description: "A workshop on getting a serverless API up and running",
     github_links: [
       {
@@ -154,7 +154,7 @@ const sampleData = [
       },
     ],
     lecture_date: "2020-12-10",
-    bootcamp_week: 12,
+    bootcamp_week: "12",
     description: "A workshop on Docker and getting it up and running",
     github_links: [
       {
@@ -217,7 +217,7 @@ const sampleData = [
       },
     ],
     lecture_date: "2020-11-10",
-    bootcamp_week: 10,
+    bootcamp_week: "10",
     description: "A recap of useReducer",
     github_links: [
       {
@@ -280,7 +280,7 @@ const sampleData = [
       },
     ],
     lecture_date: "2020-11-06",
-    bootcamp_week: 10,
+    bootcamp_week: "10",
     description: "Implementing and using JWT",
     github_links: [
       {

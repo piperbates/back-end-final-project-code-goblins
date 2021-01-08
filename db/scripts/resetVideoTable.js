@@ -15,7 +15,7 @@ const create = `
     tags TEXT [],
     timestamps JSON [],
     lecture_date DATE,
-    bootcamp_week INTEGER,
+    bootcamp_week TEXT,
     description VARCHAR (500),
     github_links JSON [],
     slides JSON [],

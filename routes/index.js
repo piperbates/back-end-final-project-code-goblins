@@ -10,10 +10,11 @@ const {
   getVideoById,
   // getAllFeedback,
   addNewFeedback,
+  getVimeoVideoData,
 } = require("../model/index");
 
 // Get all videos with optional search filter parameters (see readme.md for query parameters)
-router.get("/", async function (req, res, next) {
+router.get("/search", async function (req, res, next) {
   const { search, lecturer, week, tag } = req.query;
   if (search || lecturer || week || tag) {
     var result = await getFilteredVideos({ search, lecturer, week, tag });
@@ -24,14 +25,14 @@ router.get("/", async function (req, res, next) {
 });
 
 // Get a specific video by id at the specified path
-router.get("/:id", async function (req, res, next) {
+router.get("/searchbyid/:id", async function (req, res, next) {
   const { id } = req.params;
   const result = await getVideoById(id);
   res.json(result);
 });
 
 // Add a video
-router.post("/", async function (req, res, next) {
+router.post("/addcontent", async function (req, res, next) {
   console.log("post request made");
   const {
     title,
@@ -125,6 +126,11 @@ router.post("/feedback", async function (req, res) {
   const items = await addNewFeedback(body);
   // console.log("this is items", items);
   res.json(items);
+});
+
+router.get("/vimeo/allData", async function (req, res, next) {
+  const vimeoData = await getVimeoVideoData(req.query);
+  res.json(vimeoData);
 });
 
 module.exports = router;

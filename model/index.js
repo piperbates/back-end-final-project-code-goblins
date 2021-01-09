@@ -1,4 +1,10 @@
 const { query } = require("../db");
+let Vimeo = require("vimeo").Vimeo;
+let client = new Vimeo(
+  process.env.VIMEO_ID,
+  process.env.VIMEO_SECRET,
+  process.env.VIMEO_TOKEN
+);
 
 //Get all videos
 async function getAllVideos() {
@@ -139,7 +145,6 @@ async function updateVideo(
   return result.rows[0].id;
 }
 
-
 /* FEEDBACK BUTTON */
 //get all feedback
 async function getAllFeedback() {
@@ -149,24 +154,43 @@ async function getAllFeedback() {
   return res.rows;
 }
 
-
 //Add new feedback function, adds new piece of feedback to the feedback table
 async function addNewFeedback(value) {
-    console.log({value})
-    const res = await query(
-      `
+  console.log({ value });
+  const res = await query(
+    `
       INSERT INTO feedbackTable (
         videoid,
         feedback
         )
       VALUES ($1, $2)
       `,
-      [
-        value.videoId, value.feedback
-      ]
+    [value.videoId, value.feedback]
+  );
+  return res;
+}
+
+const getVimeoVideoData = async (query) => {
+  return new Promise((resolve, reject) => {
+    client.request(
+      {
+        path: "/me/videos",
+        query: {
+          page: query.pagePosition,
+          per_page: query.perPageCount,
+          fields:
+            "uri,name,description,link,duration,created_time,pictures.sizes,user.name",
+        },
+      },
+      (error, body) => {
+        if (error) {
+          reject(error);
+        }
+        resolve(body);
+      }
     );
-    return res;
-  }
+  });
+};
 
 module.exports = {
   getAllVideos,
@@ -175,6 +199,7 @@ module.exports = {
   deleteVideo,
   updateVideo,
   getVideoById,
-  getAllFeedback, 
-  addNewFeedback
+  getAllFeedback,
+  addNewFeedback,
+  getVimeoVideoData,
 };

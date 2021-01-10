@@ -179,7 +179,7 @@ const getVimeoVideoData = async (query) => {
           page: query.pagePosition,
           per_page: query.perPageCount,
           fields:
-            "uri,name,description,link,duration,created_time,pictures.sizes,user.name",
+            "uri,name,description,link,duration,created_time,pictures.sizes",
         },
       },
       (error, body) => {

@@ -16,10 +16,12 @@ const create = `
     timestamps JSON [],
     lecture_date DATE,
     bootcamp_week TEXT,
+    cohort INTEGER,
     description VARCHAR (500),
     github_links JSON [],
     slides JSON [],
-    other_links JSON [])
+    other_links JSON []
+    )
     `;
 
 const populate = `

@@ -52,6 +52,7 @@ async function addVideo(
   timestamps,
   lecture_date,
   bootcamp_week,
+  cohort,
   description,
   github_links,
   slides,
@@ -66,10 +67,11 @@ async function addVideo(
       timestamps,
       lecture_date,
       bootcamp_week,
+      cohort,
       description,
       github_links,
       slides,
-      other_links) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *;`,
+      other_links) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *;`,
     [
       title,
       lecturer,
@@ -79,6 +81,7 @@ async function addVideo(
       timestamps,
       lecture_date,
       bootcamp_week,
+      cohort,
       description,
       github_links,
       slides,
@@ -104,6 +107,7 @@ async function updateVideo(
   timestamps,
   lecture_date,
   bootcamp_week,
+  cohort,
   description,
   github_links,
   slides,
@@ -120,11 +124,12 @@ async function updateVideo(
   timestamps = COALESCE($6, timestamps),
   lecture_date = COALESCE($7, lecture_date),
   bootcamp_week = COALESCE($8, bootcamp_week),
-  description = COALESCE($9, description),
-  github_links = COALESCE($10, github_links),
-  slides = COALESCE($11, slides),
-  other_links = COALESCE($12, other_links) 
-  WHERE id = ($13) 
+  cohort = COALESCE($9, bootcamp_week),
+  description = COALESCE($10, description),
+  github_links = COALESCE($11, github_links),
+  slides = COALESCE($12, slides),
+  other_links = COALESCE($13, other_links) 
+  WHERE id = ($14) 
   RETURNING id;`,
     [
       title,
@@ -135,6 +140,7 @@ async function updateVideo(
       timestamps,
       lecture_date,
       bootcamp_week,
+      cohort,
       description,
       github_links,
       slides,
@@ -210,6 +216,13 @@ const addTag = async (tag) => {
   return response.rows;
 };
 
+const updateTag = async (tag) => {
+  console.log(tag);
+  const sql = `UPDATE tags SET tag = $1 WHERE key = $2`;
+  const response = await query(sql, [tag.updateValue, tag.updateRecord]);
+  return response.rows;
+};
+
 module.exports = {
   getAllVideos,
   getFilteredVideos,
@@ -223,4 +236,5 @@ module.exports = {
   getAllTagData,
   deleteTag,
   addTag,
+  updateTag,
 };

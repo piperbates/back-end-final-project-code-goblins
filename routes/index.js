@@ -14,6 +14,7 @@ const {
   getAllTagData,
   deleteTag,
   addTag,
+  updateTag,
 } = require("../model/index");
 
 // Get all videos with optional search filter parameters (see readme.md for query parameters)
@@ -46,6 +47,7 @@ router.post("/addcontent", async function (req, res, next) {
     timestamps,
     lecture_date,
     bootcamp_week,
+    cohort,
     description,
     github_links,
     slides,
@@ -60,6 +62,7 @@ router.post("/addcontent", async function (req, res, next) {
     timestamps,
     lecture_date,
     bootcamp_week,
+    cohort,
     description,
     github_links,
     slides,
@@ -92,6 +95,7 @@ router.put("/:id", async function (req, res, next) {
     timestamps,
     lecture_date,
     bootcamp_week,
+    cohort,
     description,
     github_links,
     slides,
@@ -106,6 +110,7 @@ router.put("/:id", async function (req, res, next) {
     timestamps,
     lecture_date,
     bootcamp_week,
+    cohort,
     description,
     github_links,
     slides,
@@ -150,6 +155,11 @@ router.delete("/tags/:id", async function (req, res, next) {
 
 router.post("/tags", async function (req, res, next) {
   const response = await addTag(req.body.tag);
+  res.json(response);
+});
+
+router.patch("/tags", async function (req, res, next) {
+  const response = await updateTag(req.body);
   res.json(response);
 });
 

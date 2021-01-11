@@ -11,6 +11,9 @@ const {
   // getAllFeedback,
   addNewFeedback,
   getVimeoVideoData,
+  getAllTagData,
+  deleteTag,
+  addTag,
 } = require("../model/index");
 
 // Get all videos with optional search filter parameters (see readme.md for query parameters)
@@ -131,6 +134,23 @@ router.post("/feedback", async function (req, res) {
 router.get("/vimeo/allData", async function (req, res, next) {
   const vimeoData = await getVimeoVideoData(req.query);
   res.json(vimeoData);
+});
+
+/*** tag management ***/
+
+router.get("/tags/", async function (req, res, next) {
+  const tagData = await getAllTagData();
+  res.json(tagData);
+});
+
+router.delete("/tags/:id", async function (req, res, next) {
+  const response = await deleteTag(req.params.id);
+  res.json(response);
+});
+
+router.post("/tags", async function (req, res, next) {
+  const response = await addTag(req.body.tag);
+  res.json(response);
 });
 
 module.exports = router;

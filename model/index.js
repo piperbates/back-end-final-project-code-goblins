@@ -192,6 +192,24 @@ const getVimeoVideoData = async (query) => {
   });
 };
 
+const getAllTagData = async () => {
+  const sql = `SELECT * FROM tags ORDER BY tag ASC`;
+  const response = await query(sql);
+  return response.rows;
+};
+
+const deleteTag = async (tag) => {
+  const sql = `DELETE FROM tags WHERE key = $1`;
+  const response = await query(sql, [tag]);
+  return response.rows;
+};
+
+const addTag = async (tag) => {
+  const sql = `INSERT INTO tags (tag) VALUES ($1)`;
+  const response = await query(sql, [tag]);
+  return response.rows;
+};
+
 module.exports = {
   getAllVideos,
   getFilteredVideos,
@@ -202,4 +220,7 @@ module.exports = {
   getAllFeedback,
   addNewFeedback,
   getVimeoVideoData,
+  getAllTagData,
+  deleteTag,
+  addTag,
 };

@@ -15,6 +15,12 @@ const {
   deleteTag,
   addTag,
   updateTag,
+  getAllLecturerData,
+  deleteLecturer,
+  addLecturer,
+  updateLecturer,
+  getNextLecturerVal,
+  getNextTagVal,
 } = require("../model/index");
 
 // Get all videos with optional search filter parameters (see readme.md for query parameters)
@@ -143,7 +149,7 @@ router.get("/vimeo/allData", async function (req, res, next) {
 
 /*** tag management ***/
 
-router.get("/tags/", async function (req, res, next) {
+router.get("/tags", async function (req, res, next) {
   const tagData = await getAllTagData();
   res.json(tagData);
 });
@@ -160,6 +166,38 @@ router.post("/tags", async function (req, res, next) {
 
 router.patch("/tags", async function (req, res, next) {
   const response = await updateTag(req.body);
+  res.json(response);
+});
+
+router.get("/tags/lastkey", async function (req, res, next) {
+  const response = await getNextTagVal();
+  res.json(response);
+});
+
+/*** lecture management ***/
+
+router.get("/lecturers", async function (req, res, next) {
+  const lecturerData = await getAllLecturerData();
+  res.json(lecturerData);
+});
+
+router.delete("/lecturers/:id", async function (req, res, next) {
+  const response = await deleteLecturer(req.params.id);
+  res.json(response);
+});
+
+router.post("/lecturers", async function (req, res, next) {
+  const response = await addLecturer(req.body.lecturer);
+  res.json(response);
+});
+
+router.patch("/lecturers", async function (req, res, next) {
+  const response = await updateLecturer(req.body);
+  res.json(response);
+});
+
+router.get("/lecturers/lastkey", async function (req, res, next) {
+  const response = await getNextLecturerVal();
   res.json(response);
 });
 

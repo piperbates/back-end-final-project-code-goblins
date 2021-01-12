@@ -198,6 +198,8 @@ const getVimeoVideoData = async (query) => {
   });
 };
 
+/*** tag functions ***/
+
 const getAllTagData = async () => {
   const sql = `SELECT * FROM tags ORDER BY tag ASC`;
   const response = await query(sql);
@@ -217,9 +219,49 @@ const addTag = async (tag) => {
 };
 
 const updateTag = async (tag) => {
-  console.log(tag);
   const sql = `UPDATE tags SET tag = $1 WHERE key = $2`;
   const response = await query(sql, [tag.updateValue, tag.updateRecord]);
+  return response.rows;
+};
+
+const getNextTagVal = async () => {
+  const sql = `SELECT last_value FROM tags_key_seq`;
+  const response = await query(sql);
+  return response.rows;
+};
+
+/*** lecture functions ***/
+
+const getAllLecturerData = async () => {
+  const sql = `SELECT * FROM lecturers ORDER BY lecturer ASC`;
+  const response = await query(sql);
+  return response.rows;
+};
+
+const deleteLecturer = async (lecturer) => {
+  const sql = `DELETE FROM lecturers WHERE key = $1`;
+  const response = await query(sql, [lecturer]);
+  return response.rows;
+};
+
+const addLecturer = async (lecturer) => {
+  const sql = `INSERT INTO lecturers (lecturer) VALUES ($1)`;
+  const response = await query(sql, [lecturer]);
+  return response.rows;
+};
+
+const updateLecturer = async (lecturer) => {
+  const sql = `UPDATE lecturers SET lecturer = $1 WHERE key = $2`;
+  const response = await query(sql, [
+    lecturer.updateValue,
+    lecturer.updateRecord,
+  ]);
+  return response.rows;
+};
+
+const getNextLecturerVal = async () => {
+  const sql = `SELECT last_value FROM lecturers_key_seq`;
+  const response = await query(sql);
   return response.rows;
 };
 
@@ -237,4 +279,10 @@ module.exports = {
   deleteTag,
   addTag,
   updateTag,
+  getAllLecturerData,
+  deleteLecturer,
+  addLecturer,
+  updateLecturer,
+  getNextLecturerVal,
+  getNextTagVal,
 };

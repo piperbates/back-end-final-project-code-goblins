@@ -21,6 +21,10 @@ const {
   updateLecturer,
   getNextLecturerVal,
   getNextTagVal,
+  getUniqueTags,
+  getUniqueWeek,
+  getUniqueNonSocLecturer,
+  getUniqueSocLecturer,
 } = require("../model/index");
 
 // Get all videos with optional search filter parameters (see readme.md for query parameters)
@@ -147,8 +151,8 @@ router.get("/vimeo/allData", async function (req, res, next) {
   res.json(vimeoData);
 });
 
-/*** tag management ***/
-
+/*** tag routes ***/
+/* these are used for tag editor */
 router.get("/tags", async function (req, res, next) {
   const tagData = await getAllTagData();
   res.json(tagData);
@@ -174,8 +178,8 @@ router.get("/tags/lastkey", async function (req, res, next) {
   res.json(response);
 });
 
-/*** lecture management ***/
-
+/*** lecture routes ***/
+/* these are used for lecture editor */
 router.get("/lecturers", async function (req, res, next) {
   const lecturerData = await getAllLecturerData();
   res.json(lecturerData);
@@ -199,6 +203,28 @@ router.patch("/lecturers", async function (req, res, next) {
 router.get("/lecturers/lastkey", async function (req, res, next) {
   const response = await getNextLecturerVal();
   res.json(response);
+});
+
+/*** search filter routes ***/
+/* these are used for home page search functionality */
+router.get("/filter/tags", async function (req, res, next) {
+  const response = await getUniqueTags();
+  res.json(Array.from(response).map((tag) => tag.value));
+});
+
+router.get("/filter/week", async function (req, res, next) {
+  const response = await getUniqueWeek();
+  res.json(Array.from(response).map((week) => week.value));
+});
+
+router.get("/filter/lecturer", async function (req, res, next) {
+  const response = await getUniqueSocLecturer();
+  res.json(Array.from(response).map((lecturer) => lecturer.value));
+});
+
+router.get("/filter/guest", async function (req, res, next) {
+  const response = await getUniqueNonSocLecturer();
+  res.json(Array.from(response).map((guest) => guest.value));
 });
 
 module.exports = router;

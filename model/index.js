@@ -265,6 +265,46 @@ const getNextLecturerVal = async () => {
   return response.rows;
 };
 
+/*** filter functions ***/
+const getUniqueTags = async () => {
+  const sql = `SELECT DISTINCT UNNEST(tags) AS value FROM videos ORDER BY value ASC`;
+  const response = await query(sql);
+  return response.rows;
+};
+
+const getUniqueWeek = async () => {
+  const sql = `SELECT DISTINCT(bootcamp_week) AS value FROM videos ORDER BY bootcamp_week ASC`;
+  const response = await query(sql);
+  return response.rows;
+};
+
+const getUniqueSocLecturer = async () => {
+  const sql = `SELECT DISTINCT(lecturer) 
+               AS value
+               FROM videos 
+               WHERE lecturer 
+               IN (
+                 SELECT DISTINCT(lecturer) 
+                 FROM lecturers)
+               ORDER BY lecturer ASC`;
+  const response = await query(sql);
+  return response.rows;
+};
+
+const getUniqueNonSocLecturer = async () => {
+  const sql = `SELECT DISTINCT(lecturer)
+               AS value
+               FROM videos 
+               WHERE lecturer 
+               NOT IN (
+                 SELECT DISTINCT(lecturer) 
+                 FROM lecturers
+                 )
+               ORDER BY lecturer ASC`;
+  const response = await query(sql);
+  return response.rows;
+};
+
 module.exports = {
   getAllVideos,
   getFilteredVideos,
@@ -285,4 +325,8 @@ module.exports = {
   updateLecturer,
   getNextLecturerVal,
   getNextTagVal,
+  getUniqueTags,
+  getUniqueWeek,
+  getUniqueNonSocLecturer,
+  getUniqueSocLecturer,
 };

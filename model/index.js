@@ -213,13 +213,13 @@ const deleteTag = async (tag) => {
 };
 
 const addTag = async (tag) => {
-  const sql = `INSERT INTO tags (tag) VALUES ($1)`;
+  const sql = `INSERT INTO tags (tag) VALUES (LOWER($1))`;
   const response = await query(sql, [tag]);
   return response.rows;
 };
 
 const updateTag = async (tag) => {
-  const sql = `UPDATE tags SET tag = $1 WHERE key = $2`;
+  const sql = `UPDATE tags SET tag = LOWER($1) WHERE key = $2`;
   const response = await query(sql, [tag.updateValue, tag.updateRecord]);
   return response.rows;
 };

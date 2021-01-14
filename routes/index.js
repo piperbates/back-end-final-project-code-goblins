@@ -47,7 +47,7 @@ router.get("/searchbyid/:id", async function (req, res, next) {
 
 // Add a video
 router.post("/addcontent", async function (req, res, next) {
-  console.log("post request made");
+  console.log(req.body);
   const {
     title,
     lecturer,

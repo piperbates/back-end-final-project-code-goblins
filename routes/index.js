@@ -8,7 +8,7 @@ const {
   updateVideo,
   getFilteredVideos,
   getVideoById,
-  // getAllFeedback,
+  getAllFeedback,
   addNewFeedback,
   getVimeoVideoData,
   getAllTagData,
@@ -130,11 +130,12 @@ router.put("/:id", async function (req, res, next) {
   res.json({ success: true, data: `Row with id ${result} has been updated.` });
 });
 
-// /* GET all feedback */
-// router.get('/feedback', async function(req, res, next) {
-//   const feedback = await getAllFeedback();
-//   res.json({success: true, payload: feedback})
-// });
+// /* GET feedback */
+router.get('/feedback/:id', async function(req, res, next) {
+  const id = req.params.id;
+  const feedback = await getAllFeedback(id);
+  res.json({success: true, payload: feedback})
+});
 
 //POST new feedback
 router.post("/feedback", async function (req, res) {

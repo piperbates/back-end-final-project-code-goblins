@@ -5,8 +5,8 @@ async function createFeedbackTable() {
         CREATE TABLE feedbackTable (
             id SERIAL PRIMARY KEY,
             videoid INTEGER,
-            feedback TEXT
-
+            feedback TEXT,
+            created_at TIMESTAMP
         )
     `);
   console.log(res);

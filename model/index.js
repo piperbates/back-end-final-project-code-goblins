@@ -142,28 +142,39 @@ async function updateVideo(data) {
 
 /* FEEDBACK BUTTON */
 //get all feedback
-async function getAllFeedback() {
-  const res = await query(`
-  SELECT * FROM ${config.DATABASE_FEEDBACK}
-    `);
+
+// async function getAllFeedback() {
+//   const res = await query(`
+//   SELECT * FROM ${config.DATABASE_FEEDBACK}
+//     `);
+
+async function getAllFeedback(value) {
+  const res = await query(
+    `
+  SELECT * FROM ${config.DATABASE_FEEDBACK} WHERE videoid = $1 ORDER BY id DESC
+    `,[value]
+  );
   return res.rows;
 }
 
 //Add new feedback function, adds new piece of feedback to the feedback table
 async function addNewFeedback(value) {
-  console.log({ value });
+  let date = new Date();
   const res = await query(
     `
       INSERT INTO ${config.DATABASE_FEEDBACK} (
         videoid,
-        feedback
+        feedback,
+        created_at
         )
-      VALUES ($1, $2)
+      VALUES ($1, $2, $3)
       `,
-    [value.videoId, value.feedback]
+    [value.videoId, value.feedback, date]
   );
   return res;
 }
+
+//Vimeo Data
 
 const getVimeoVideoData = async (query) => {
   return new Promise((resolve, reject) => {

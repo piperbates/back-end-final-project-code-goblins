@@ -9,7 +9,9 @@ const { config } = require("../config");
 
 //Get all videos
 async function getAllVideos() {
-  const result = await query(`SELECT * FROM ${config.DATABASE_VIDEOS} ;`);
+  const result = await query(
+    `SELECT * FROM ${config.DATABASE_VIDEOS} ORDER BY lecture_date DESC;`
+  );
   return result.rows;
 }
 

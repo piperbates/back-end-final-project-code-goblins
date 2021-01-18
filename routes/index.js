@@ -25,6 +25,8 @@ const {
   getUniqueWeek,
   getUniqueNonSocLecturer,
   getUniqueSocLecturer,
+  getVideosPagination,
+  getTotalVideoCount,
 } = require("../model/index");
 
 // Get all videos with optional search filter parameters (see readme.md for query parameters)
@@ -42,6 +44,16 @@ router.get("/search", async function (req, res, next) {
 router.get("/searchbyid/:id", async function (req, res, next) {
   const { id } = req.params;
   const result = await getVideoById(id);
+  res.json(result);
+});
+
+router.get("/search/pagination", async function (req, res, next) {
+  const result = await getVideosPagination(req.query);
+  res.json(result);
+});
+
+router.get("/search/count", async function (req, res, next) {
+  const result = await getTotalVideoCount();
   res.json(result);
 });
 
@@ -95,10 +107,10 @@ router.put("/cms/updatecontent/", async function (req, res, next) {
 });
 
 // /* GET feedback */
-router.get('/feedback/:id', async function(req, res, next) {
+router.get("/feedback/:id", async function (req, res, next) {
   const id = req.params.id;
   const feedback = await getAllFeedback(id);
-  res.json({success: true, payload: feedback})
+  res.json({ success: true, payload: feedback });
 });
 
 //POST new feedback

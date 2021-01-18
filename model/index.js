@@ -152,7 +152,8 @@ async function getAllFeedback(value) {
   const res = await query(
     `
   SELECT * FROM ${config.DATABASE_FEEDBACK} WHERE videoid = $1 ORDER BY id DESC
-    `,[value]
+    `,
+    [value]
   );
   return res.rows;
 }
@@ -185,7 +186,7 @@ const getVimeoVideoData = async (query) => {
           page: query.pagePosition,
           per_page: query.perPageCount,
           fields:
-            "uri,name,description,link,duration,created_time,pictures.sizes",
+            "uri,name,description,link,duration,created_time,pictures.sizes,files",
         },
       },
       (error, body) => {
@@ -305,6 +306,25 @@ const getUniqueNonSocLecturer = async () => {
   return response.rows;
 };
 
+const getTotalVideoCount = async () => {
+  const sql = `SELECT COUNT(*) FROM videos`;
+  const repsonse = await query(sql);
+  return repsonse.rows;
+};
+
+const getVideosPagination = async (params) => {
+  const { paging, position } = params;
+  const updPosition = (position - 1) * paging;
+  const sql = `SELECT * FROM videos
+               LIMIT $1
+               OFFSET $2`;
+  const response = await query(sql, [paging, updPosition]);
+  return response.rows;
+};
+
+//LIMIT - amount per page
+//OFFSET - row to start in database
+
 module.exports = {
   getAllVideos,
   getFilteredVideos,
@@ -329,4 +349,6 @@ module.exports = {
   getUniqueWeek,
   getUniqueNonSocLecturer,
   getUniqueSocLecturer,
+  getVideosPagination,
+  getTotalVideoCount,
 };

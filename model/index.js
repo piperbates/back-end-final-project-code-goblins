@@ -9,9 +9,7 @@ const { config } = require("../config");
 
 //Get all videos
 async function getAllVideos() {
-  const result = await query(
-    `SELECT * FROM ${config.DATABASE_VIDEOS} ORDER BY lecture_date DESC;`
-  );
+  const result = await query(`SELECT * FROM ${config.DATABASE_VIDEOS} ;`);
   return result.rows;
 }
 
@@ -29,8 +27,7 @@ async function getFilteredVideos(urlQueries) {
       WHERE (description ILIKE $1 OR title ILIKE $1)
       AND (lecturer ILIKE $2)
       AND (bootcamp_week = COALESCE($3, bootcamp_week))
-      AND ARRAY ${tag}::text[]&&tags
-      ORDER BY lecture_date DESC;`,
+      AND ARRAY ${tag}::text[]<@tags;`,
     [search, lecturer, week]
   );
   return result.rows;

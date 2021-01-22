@@ -1,5 +1,11 @@
 # Code Goblins - Lecture Resources Hub
-Test
+
+Front end repo: https://github.com/piperbates/front-end-final-project-code-goblins
+Back end repo: https://github.com/piperbates/back-end-final-project-code-goblins
+
+## The team: The Code Goblins
+Piper Bates, Dan Smith, Anna Griffin, Will Edwards, Dan Watson, Aftab Hussain.
+
 - **The Problem**: **How can we deliver Lecture Resources to bootcampers?**
 
   - Accessing and finding relevant videos and resources.
